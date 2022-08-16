@@ -1,33 +1,34 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
 import Header_Custom from './components/Header_Custom.vue'
+import Card from './components/Card.vue'
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      poke_data: undefined
+    }
+  },
+  mounted(){
+    fetch('https://pokeapi.co/api/v2/pokemon/1')
+    .then(data => data.json())
+    .then(data => this.poke_data = data)
+    .then(data => console.log(data.sprites.front_default))
+  }
+} 
 </script>
 
 <template>
   <div>
     <Header_Custom />
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <Card v-if="poke_data" :poke_name="poke_data.name" :poke_image="poke_data.sprites.front_default" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  div{
+    width: fit-content;
+    margin: 0 auto;
+  }
 </style>
