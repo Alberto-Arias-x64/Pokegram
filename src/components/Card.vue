@@ -1,36 +1,117 @@
 <script>
 export default {
-    props:[
-        'poke_name',
-        'poke_image',
-        'poke_height',
-        'poke_weight',
-        'poke_exp'
-    ]
-}
+  props: [
+    "poke_name",
+    "poke_image",
+    "poke_height",
+    "poke_weight",
+    "poke_exp",
+    "poke_post",
+  ],
+  data(){
+    return{
+      new_comment: ''
+    }
+  },
+  methods: {
+    click_post : function() {
+      this.new_comment = ''
+    }
+  },
+};
 </script>
 
 <template>
-    <div class="card">
-        <header>
-            <h6>{{poke_name}}</h6>
-        </header>
-        <img :src="poke_image" alt="">
+  <div class="card">
+    <header>
+      <div class="card_profile_photo">
+        <img :src="poke_image" alt="" />
+      </div>
+      <h5>{{ poke_name }}</h5>
+    </header>
+    <div class="card_post">
+      <img :src="poke_post" alt="" />
     </div>
+    <div class="comments">
+      <div class="icons">
+        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <ion-icon name="paper-plane-outline"></ion-icon>
+      </div>
+      <div class="likes">
+        <p>{{ poke_exp }}</p>
+        <p>PokeLikes</p>
+      </div>
+    </div>
+    <div class="new_comment">
+      <ion-icon name="happy-outline"></ion-icon>
+      <input type="text" name="" id="" v-model="new_comment" placeholder="Add a comment..." />
+      <button @click="click_post">Post</button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-    .card{
-        width: 500px;
-        height: fit-content;
+.card {
+  width: 500px;
+  height: fit-content;
 
-        display: grid;
-        grid-template-rows: 60px 500px 100px 60px;
+  display: grid;
+  grid-template-rows: 60px 500px 100px 50px;
 
-        border: 1px solid grey;
-    }
-    img{
-        width: 100%;
-        height: 100%;
-    }
+  border: 1px solid var(--border_color);
+
+  border-radius: 6px;
+  background-color: white;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  padding-left: 10px;
+
+  border-bottom: 1px solid var(--border_color);
+}
+.card_profile_photo {
+  height: 35px;
+  width: 35px;
+  padding: 2px;
+  background-image: var(--principal_gradient);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.card_profile_photo > img {
+  scale: 2;
+  filter: drop-shadow(0 0 1px black);
+}
+.comments {
+  padding: 10px;
+}
+.icons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.icons > *:hover{
+  opacity: 0.5;
+}
+.likes {
+  display: flex;
+  flex-direction: row;
+  gap: 1ch;
+
+  font-size: small;
+  font-weight: bold;
+}
+.new_comment{
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: max-content auto min-content;
+  gap: 10px;
+  align-items: center;
+
+  border-top: 1px solid var(--border_color);
+}
 </style>
