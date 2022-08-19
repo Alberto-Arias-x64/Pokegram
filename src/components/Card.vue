@@ -1,36 +1,35 @@
-<script>
-export default {
-  props: [
-    "poke_name",
-    "poke_image",
-    "poke_height",
-    "poke_weight",
-    "poke_exp",
-    "poke_post",
-  ],
-  data(){
-    return{
-      new_comment: ''
-    }
-  },
-  methods: {
-    click_post : function() {
-      this.new_comment = ''
-    }
-  },
-};
+<script setup>
+import { ref, defineProps, toRef } from "vue"
+
+const new_comment = ref("")
+
+const props_ext = defineProps({
+  poke_name: String,
+  poke_image: String,
+  poke_height: String,
+  poke_weight: String,
+  poke_exp: String,
+  poke_post: String,
+})
+
+const props = toRef(props_ext)
+
+function click_post(params) {
+  new_comment.value = ""
+}
+console.log(props)
 </script>
 
 <template>
   <div class="card">
     <header>
       <div class="card_profile_photo">
-        <img :src="poke_image" alt="" />
+        <img :src="props.poke_image" alt="" />
       </div>
-      <h5>{{ poke_name }}</h5>
+      <h5>{{ props.poke_name }}</h5>
     </header>
     <div class="card_post">
-      <img :src="poke_post" alt="" />
+      <img :src="props.poke_post" alt="" />
     </div>
     <div class="comments">
       <div class="icons">
@@ -39,13 +38,19 @@ export default {
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
       <div class="likes">
-        <p>{{ poke_exp }}</p>
+        <p>{{ props.poke_exp }}</p>
         <p>PokeLikes</p>
       </div>
     </div>
     <div class="new_comment">
       <ion-icon name="happy-outline"></ion-icon>
-      <input type="text" name="" id="" v-model="new_comment" placeholder="Add a comment..." />
+      <input
+        type="text"
+        name=""
+        id=""
+        v-model="new_comment"
+        placeholder="Add a comment..."
+      />
       <button @click="click_post">Post</button>
     </div>
   </div>
@@ -94,7 +99,7 @@ header {
   flex-direction: row;
   gap: 10px;
 }
-.icons > *:hover{
+.icons > *:hover {
   opacity: 0.5;
 }
 .likes {
@@ -105,7 +110,7 @@ header {
   font-size: small;
   font-weight: bold;
 }
-.new_comment{
+.new_comment {
   padding: 0 10px;
   display: grid;
   grid-template-columns: max-content auto min-content;

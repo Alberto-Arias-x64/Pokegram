@@ -1,16 +1,12 @@
-<script>
-export default {
-  data() {
-    return {
-      profile: undefined,
-    };
-  },
-  mounted() {
+<script setup>
+  import {ref, onMounted} from 'vue'
+
+  const profile = ref(undefined)
+  onMounted(() => {
     fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-      .then((data) => data.json())
-      .then((data) => (this.profile = data));
-  },
-};
+      .then(data => data.json())
+      .then(data => profile.value = data)
+  })
 </script>
 
 <template>
@@ -19,8 +15,8 @@ export default {
       <img :src="profile.sprites.front_default" alt="" />
     </div>
     <div>
-        <h5>{{profile.name}}@pikagram</h5>
-        <p>{{profile.name}}</p>
+      <h5>{{ profile.name }}@pikagram</h5>
+      <p>{{ profile.name }}</p>
     </div>
     <button>Switch</button>
   </div>
@@ -28,13 +24,13 @@ export default {
 
 <style scoped>
 #side_panel {
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 10px;
+  gap: 10px;
 }
 .card_profile_photo {
   height: 65px;
@@ -48,7 +44,7 @@ export default {
   scale: 2;
   filter: drop-shadow(0 0 1px black);
 }
-p{
+p {
   margin: 0;
   color: #8e8e8e;
 }
