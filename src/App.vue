@@ -1,9 +1,10 @@
 <script setup>
 import { reactive, onBeforeMount } from "vue"
 
-import Header_Custom from "./components/Header_Pokegram.vue"
+import Header from "./components/Header.vue"
 import Card from "./components/Card.vue"
 import Profile from "./components/Profile.vue"
+import Spiner from './components/Spiner.vue'
 
 const Poke_Data = reactive({
   Data: [],
@@ -30,17 +31,18 @@ const Get_Data = async id => {
 </script>
 
 <template>
-  <Header_Custom />
+  <Header/>
   <main>
     <div id="cards">
       <Card
-        v-for="item in Poke_Data.Data"
-        :poke_name="item.name"
-        :poke_exp="item.base_experience"
-        :poke_image="item.sprites.front_default"
-        :poke_post="item.message"
-        :key="item.id" 
+        v-for="{name, base_experience, sprites, message, id } in Poke_Data.Data"
+        :poke_name="name"
+        :poke_exp="base_experience"
+        :poke_image="sprites.front_default"
+        :poke_post="message"
+        :key="id" 
       />
+      <Spiner/>
     </div>
     <Profile />
   </main>

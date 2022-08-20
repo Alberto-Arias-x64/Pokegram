@@ -1,20 +1,20 @@
 <script setup>
-import { ref, defineProps } from "vue"
+  import { ref, defineProps } from "vue"
 
-const new_comment = ref("")
+  const new_comment = ref("")
 
-const props = defineProps({
-  poke_name: String,
-  poke_image: String,
-  poke_height: String,
-  poke_weight: String,
-  poke_exp: String,
-  poke_post: String,
-})
+  const props = defineProps({
+    poke_name: String,
+    poke_image: String,
+    poke_height: String,
+    poke_weight: String,
+    poke_exp: String,
+    poke_post: String,
+  })
 
-function click_post(params) {
-  new_comment.value = ""
-}
+  function click_post(params) {
+    new_comment.value = ""
+  }
 </script>
 
 <template>
