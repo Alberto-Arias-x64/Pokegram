@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, onBeforeMount } from "vue"
+import { reactive, onBeforeMount } from "vue"
 
 import Header_Custom from "./components/Header_Pokegram.vue"
 import Card from "./components/Card.vue"
@@ -49,15 +49,20 @@ const Get_Data = async id => {
 <style scoped>
 main {
   height: 100%;
-  width: fit-content;
-  margin: 0 auto;
+
   display: grid;
   grid-template-columns: 700px 300px;
+
+  justify-content: center;
+
+  overflow-y: auto;
 }
 #cards {
-  height: 100%;
   width: fit-content;
   margin: 0 auto;
-  overflow-y: auto;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>
