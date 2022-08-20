@@ -1,54 +1,63 @@
 <script setup>
-import { reactive, onMounted } from "vue"
+import { reactive, onMounted, onBeforeMount } from "vue"
 
 import Header_Custom from "./components/Header_Pokegram.vue"
 import Card from "./components/Card.vue"
 import Profile from "./components/Profile.vue"
 
-const poke_data = reactive({
-  data: undefined,
+const Poke_Data = reactive({
+  Data: [],
 })
 
-onMounted(async() => {
-  const Data_1 = await fetch("https://pokeapi.co/api/v2/pokemon/3").then(data => data.json())
-  const Data_2 = await fetch("https://dog.ceo/api/breeds/image/random").then(data => data.json())
+onBeforeMount(async() => {
+  Poke_Data.Data.push(await Get_Data(1))
+  Poke_Data.Data.push(await Get_Data(2))
+  Poke_Data.Data.push(await Get_Data(3))
+  Poke_Data.Data.push(await Get_Data(4))
+  Poke_Data.Data.push(await Get_Data(5))
+})
+
+const Get_Data = async id => {
+  const Data_1 = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(Data => Data.json())
+  const Data_2 = await fetch("https://dog.ceo/api/breeds/image/random").then(Data => Data.json())
   const Data = {
     ...Data_1,
     ...Data_2
   }
-  poke_data.data = Data
-  
-})
+  return Data
+}
 
 </script>
 
 <template>
-  <div>
-    <Header_Custom />
-    <main>
-      <div id="cards">
-        <Card
-          v-if="poke_data.data"
-          :poke_name="poke_data.data.name"
-          :poke_exp="poke_data.data.base_experience"
-          :poke_image="poke_data.data.sprites.front_default"
-          :poke_post="poke_data.data.message"
-        />
-      </div>
-      <Profile />
-    </main>
-  </div>
+  <Header_Custom />
+  <main>
+    <div id="cards">
+      <Card
+        v-for="item in Poke_Data.Data"
+        :poke_name="item.name"
+        :poke_exp="item.base_experience"
+        :poke_image="item.sprites.front_default"
+        :poke_post="item.message"
+        :key="item.id" 
+      />
+    </div>
+    <Profile />
+  </main>
 </template>
 
 <style scoped>
 main {
+  height: 100%;
   width: fit-content;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 700px 300px;
 }
 #cards {
+  height: 100%;
   width: fit-content;
-  margin: 10px auto;
+  margin: 0 auto;
+  overflow-y: auto;
 }
 </style>

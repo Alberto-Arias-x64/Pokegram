@@ -20,6 +20,8 @@ header {
   height: 60px;
   width: 100vw;
 
+  margin-bottom: 10px;
+
   background-color: white;
   border-bottom: 1px solid var(--border_color);
 }
@@ -39,12 +41,14 @@ header {
   flex-direction: row;
   gap: 20px;
 }
-.icon > * {
-  color: black;
-}
 #logo {
   height: 40px;
 }
+
+#logo > img{
+  width: auto;
+}
+
 input{
 	width: 270px;
 	padding: 10px;

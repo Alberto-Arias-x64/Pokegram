@@ -1,9 +1,9 @@
 <script setup>
-import { ref, defineProps, toRef } from "vue"
+import { ref, defineProps } from "vue"
 
 const new_comment = ref("")
 
-const props_ext = defineProps({
+const props = defineProps({
   poke_name: String,
   poke_image: String,
   poke_height: String,
@@ -12,12 +12,9 @@ const props_ext = defineProps({
   poke_post: String,
 })
 
-const props = toRef(props_ext)
-
 function click_post(params) {
   new_comment.value = ""
 }
-console.log(props)
 </script>
 
 <template>
