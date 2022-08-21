@@ -6,9 +6,9 @@
   const props = defineProps({
     poke_name: String,
     poke_image: String,
-    poke_height: String,
-    poke_weight: String,
-    poke_exp: String,
+    poke_height: Number,
+    poke_weight: Number,
+    poke_exp: Number,
     poke_post: String,
   })
 
