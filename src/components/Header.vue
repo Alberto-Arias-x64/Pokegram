@@ -1,14 +1,17 @@
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   setup(props) {
     const home = ref('home')
     const router = useRouter()
+    const route = useRoute()
     function change({target}) {
       router.push({path:`/${target.id}`})
-      home.value = target.id
+      .then(() =>{
+        if (route.path == `/${target.id}`) home.value = target.id
+      })
     }
     return{change, home}
   },
