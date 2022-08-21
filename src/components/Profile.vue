@@ -1,12 +1,14 @@
 <script setup>
-  import {ref, onMounted} from 'vue'
+  import {ref, onBeforeMount} from 'vue'
 
   const profile = ref(undefined)
-  onMounted(() => {
+
+  onBeforeMount(() => {
     fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
       .then(data => data.json())
       .then(data => profile.value = data)
   })
+
 </script>
 
 <template>
