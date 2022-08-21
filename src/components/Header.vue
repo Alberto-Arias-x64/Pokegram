@@ -1,3 +1,20 @@
+<script>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+export default {
+  setup(props) {
+    const home = ref('home')
+    const router = useRouter()
+    function change({target}) {
+      router.push({path:`/${target.id}`})
+      home.value = target.id
+    }
+    return{change, home}
+  },
+}
+</script>
+
 <template>
   <header>
     <div id="container">
@@ -6,11 +23,11 @@
       </div>
       <input type="text" placeholder="Search" />
       <div class="icons">
-        <ion-icon name="home-outline"></ion-icon>
-        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        <ion-icon name="add-circle-outline"></ion-icon>
-        <ion-icon name="compass-outline"></ion-icon>
-        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon @click="change" id="home" :name="home != 'home' ? 'home-outline' : 'home-sharp'"></ion-icon>
+        <ion-icon @click="change" id="chat" :name="home != 'chat' ? 'chatbubble-ellipses-outline' : 'chatbubble-ellipses-sharp'"></ion-icon>
+        <ion-icon @click="change" id="new"  :name="home != 'new' ? 'add-circle-outline' : 'add-circle-sharp'"></ion-icon>
+        <ion-icon @click="change" id="search" :name="home != 'search' ? 'compass-outline' : 'compass-sharp'"></ion-icon>
+        <ion-icon @click="change" id="like" :name="home != 'like' ? 'heart-outline' : 'heart-sharp'"></ion-icon>
       </div>
     </div>
   </header>
