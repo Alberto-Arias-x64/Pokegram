@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount } from "vue"
+import { reactive, onBeforeMount, onMounted } from "vue"
 
 import Card from "../components/Card.vue"
 import Profile from "../components/Profile.vue"
@@ -7,14 +7,11 @@ import Spiner from '../components/Spiner.vue'
 
 const Poke_Data = reactive({
   Data: [],
+  Counter: 1,
 })
 
-onBeforeMount(async() => {
-  Poke_Data.Data.push(await Get_Data(1))
-  Poke_Data.Data.push(await Get_Data(2))
-  Poke_Data.Data.push(await Get_Data(3))
-  Poke_Data.Data.push(await Get_Data(4))
-  Poke_Data.Data.push(await Get_Data(5))
+onBeforeMount(() => {
+  Add_Data()
 })
 
 const Get_Data = async id => {
@@ -26,6 +23,29 @@ const Get_Data = async id => {
   }
   return Data
 }
+
+const Add_Data = async() => {
+  Poke_Data.Data.push(await Get_Data(Poke_Data.Counter))
+}
+
+onMounted(() => {
+  const options = {
+  root: document.querySelector('body'),
+  rootMargin: '0px',
+  threshold: 0.5
+  }
+
+  const callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      Poke_Data.Counter ++
+      Add_Data()
+    })
+  }
+
+  const observer = new IntersectionObserver(callback, options)
+  const target = document.querySelector('#spiner_main')
+  observer.observe(target)
+})
 
 </script>
 
@@ -40,7 +60,8 @@ const Get_Data = async id => {
             :poke_post="message"
             :key="id" 
         />
-        <Spiner/>
+        <Spiner id="spiner_main"/>
+        <br>
         </div>
         <Profile />
     </main>
