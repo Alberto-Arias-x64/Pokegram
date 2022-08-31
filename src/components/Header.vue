@@ -13,16 +13,23 @@ export default {
         if (route.path == `/${target.id}`) home.value = target.id
       })
     }
-    return{change, home}
+    function show () {
+      if(route.path !== '/login') return true
+      return false
+    } 
+    watch(() => route.path,() => {
+      home.value = route.path.slice(1)
+    })
+    return{change, home, show}
   },
 }
 </script>
 
 <template>
-  <header>
+  <header v-show="show()">
     <div id="container">
       <div id="logo">
-        <img src="../assets/logo.png" alt="" />
+        <img @click="change" id="login" src="../assets/logo.png" alt="" />
       </div>
       <input type="text" placeholder="Search" />
       <div class="icons">
@@ -63,10 +70,12 @@ header {
 }
 #logo {
   height: 40px;
+  
 }
 
 #logo > img{
   width: auto;
+  cursor: pointer;
 }
 
 input{
