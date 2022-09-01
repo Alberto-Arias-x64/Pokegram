@@ -1,5 +1,6 @@
 <script setup>
   import {ref, onBeforeMount} from 'vue'
+  import { User_Name } from '../store/store'
 
   const profile = ref(undefined)
 
@@ -17,7 +18,7 @@
       <img :src="profile.sprites.front_default" alt="" />
     </div>
     <div>
-      <h5>{{ profile.name }}@pikagram</h5>
+      <h5>{{ User_Name }}@pikagram</h5>
       <p>{{ profile.name }}</p>
     </div>
     <button>Switch</button>
