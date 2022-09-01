@@ -1,12 +1,15 @@
 <script setup>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { User_Name, Change_Name } from "../store/store";
 
 const router = useRouter()
 
-const New_User = "pikahu";
-const New_Password = "1234";
+const New_User = ref()
+const New_Password = ref()
 
 const Check = () => {
+    Change_Name(New_User.value)
     router.push({path:'/home'})
 }
 
@@ -15,7 +18,7 @@ const Check = () => {
 <template>
   <section id="login_container">
     <img id="login_img" src="../assets/pokedexu_crop.png" alt="">
-    <div>
+    <div id="login_side">
         <div class="login">
             <img id="login_logo" src="../assets/logo.png" alt="" />
             <div id="login_inputs">
@@ -72,6 +75,11 @@ input{
 #login_img{
     width: 100%;
     height: auto;
+}
+#login_side{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
 }
 #login_logo{
     width: 70%;
