@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { User_Name, Change_Name } from "../store/store";
+import { Store } from "../store/store";
 
 const router = useRouter()
 
@@ -9,6 +9,7 @@ const New_User = ref()
 const New_Password = ref()
 
 const Check = () => {
+    const {Handles:{Change_Name}} = Store
     Change_Name(New_User.value)
     router.push({path:'/home'})
 }
@@ -26,6 +27,7 @@ const Check = () => {
                 <input type="password" placeholder="Password" v-model="New_Password" />
                 <button id="button_login" @click="Check">Log In</button>
             </div>
+            <hr style="width: 100%">
             <p>OR</p>
             <div id="login_link" class="mouse">
                 <img src="../../public/favicon.png" alt="">

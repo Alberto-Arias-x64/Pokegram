@@ -1,8 +1,9 @@
 <script setup>
   import {ref, onBeforeMount} from 'vue'
-  import { User_Name } from '../store/store'
+  import { Store } from '../store/store'
 
   const profile = ref(undefined)
+  const {User_Name} = Store
 
   onBeforeMount(() => {
     fetch("https://pokeapi.co/api/v2/pokemon/pikachu")

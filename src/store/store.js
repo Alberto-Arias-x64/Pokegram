@@ -1,10 +1,17 @@
-import { ref } from "vue";
+import { reactive } from "vue";
 
-const User_Name = ref('an')
+const Store = reactive({
+    User_Name: '',
+    Users_Images:[],
+    Handles:{
+        Change_Name: element => {
+            Store.User_Name = element
+        },
+        Add_Image: element => {
+            Store.Users_Images.push(element)
+        },
+    }
+})
 
-function Change_Name(New_Name) {
-    User_Name.value = New_Name
-}
 
-
-export {User_Name, Change_Name}
+export {Store}

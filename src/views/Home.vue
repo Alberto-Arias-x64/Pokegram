@@ -1,14 +1,18 @@
 <script setup>
-import { reactive, onBeforeMount, onMounted } from "vue"
+import { reactive, onBeforeMount, onMounted, ref } from "vue"
 
 import Card from "../components/Card.vue"
 import Profile from "../components/Profile.vue"
 import Spiner from '../components/Spiner.vue'
+import StoriesVue from "../components/Stories.vue"
+import Stories from "../components/Stories.vue"
 
 const Poke_Data = reactive({
   Data: [],
   Counter: 1,
 })
+
+const Poke_Array = ref([])
 
 onBeforeMount(() => {
   Add_Data()
@@ -21,6 +25,10 @@ const Get_Data = async id => {
     ...Data_1,
     ...Data_2
   }
+  Poke_Array.value.push({
+    image: Data_1.sprites.front_default,
+    name: Data_1.name
+  })
   return Data
 }
 
@@ -52,11 +60,12 @@ onMounted(() => {
 <template>
     <main>
         <div id="cards">
+        <Stories :poke_array="Poke_Array" />
         <Card
-            v-for="{name, base_experience, sprites, message, id } in Poke_Data.Data"
+            v-for="{name, base_experience, sprites:{front_default}, message, id } in Poke_Data.Data"
             :poke_name="name"
             :poke_exp="base_experience"
-            :poke_image="sprites.front_default"
+            :poke_image="front_default"
             :poke_post="message"
             :key="id" 
         />
