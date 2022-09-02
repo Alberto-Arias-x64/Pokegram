@@ -1,14 +1,17 @@
 <script setup>
-import { ref, onBeforeMount, defineProps, toRefs } from "vue";
+import { ref, onBeforeMount, defineProps, toRefs, defineEmits, } from "vue";
 import { Store } from "../store/store";
 
 const profile = ref(undefined);
-const { User_Name } = Store;
+const { User_Name, Handles:{Change_Image} } = Store;
 
 onBeforeMount(() => {
   fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
     .then((data) => data.json())
-    .then((data) => (profile.value = data));
+    .then((data) => {
+      profile.value = data
+      Change_Image(data.sprites.front_default)
+    })
 });
 
 const Props = defineProps({
