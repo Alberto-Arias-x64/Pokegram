@@ -72,7 +72,7 @@ onMounted(() => {
         <Spiner id="spiner_main"/>
         <br>
         </div>
-        <Profile />
+        <Profile :suggested_list="Poke_Array"/>
     </main>
 </template>
 

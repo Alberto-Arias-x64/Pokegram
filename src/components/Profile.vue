@@ -1,36 +1,78 @@
 <script setup>
-  import {ref, onBeforeMount} from 'vue'
-  import { Store } from '../store/store'
+import { ref, onBeforeMount, defineProps, toRefs, defineEmits, } from "vue";
+import { Store } from "../store/store";
 
-  const profile = ref(undefined)
-  const {User_Name} = Store
+const profile = ref(undefined);
+const { User_Name, Handles:{Change_Image} } = Store;
 
-  onBeforeMount(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-      .then(data => data.json())
-      .then(data => profile.value = data)
-  })
+onBeforeMount(() => {
+  fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+    .then((data) => data.json())
+    .then((data) => {
+      profile.value = data
+      Change_Image(data.sprites.front_default)
+    })
+});
+
+const Props = defineProps({
+  suggested_list: Array,
+});
+
+const {suggested_list} = toRefs(Props)
 
 </script>
 
 <template>
-  <div v-if="profile" id="side_panel">
-    <div class="card_profile_photo">
-      <img :src="profile.sprites.front_default" alt="" />
+  <section v-if="profile" id="side_panel">
+    <div class="card_profile">
+      <div class="card_profile_photo">
+        <img :src="profile.sprites.front_default" alt="" />
+      </div>
+      <div>
+        <h5>{{ User_Name }}@pokegram</h5>
+        <p>{{ profile.name }}</p>
+      </div>
+      <button>Switch</button>
     </div>
-    <div>
-      <h5>{{ User_Name }}@pikagram</h5>
-      <p>{{ profile.name }}</p>
+
+    <div id="separator">
+      <h4>Suggestions For You</h4>
+      <h5>See All</h5>
     </div>
-    <button>Switch</button>
-  </div>
+
+    <div class="card_profile" v-for="{image, name} in suggested_list" :key="name" >
+      <div class="card_profile_photo min">
+        <img :src="image" alt="" />
+      </div>
+      <div>
+        <h5>{{ name }}</h5>
+        <p>Followed by X64</p>
+      </div>
+      <button>Follow</button>
+    </div>
+
+  </section>
 </template>
 
 <style scoped>
+h4 {
+  font-size: 14px;
+  color: #8e8e8e;
+}
+p {
+  margin: 0;
+  color: #8e8e8e;
+  font-size: 12px;
+}
 #side_panel {
-  height: fit-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 15px;
+}
+.card_profile {
+  height: fit-content;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
 
   align-items: center;
 
@@ -48,8 +90,12 @@
   scale: 2;
   filter: drop-shadow(0 0 1px black);
 }
-p {
-  margin: 0;
-  color: #8e8e8e;
+.min{
+  height: 32px;
+  width: 32px;
+}
+#separator{
+  display: grid;
+  grid-template-columns: auto max-content;
 }
 </style>

@@ -1,12 +1,16 @@
 <script>
-import { ref, watch } from 'vue'
+import { ref, watch, onUpdated } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { Store } from '../store/store'
 
 export default {
   setup(props) {
     const home = ref('home')
+    const user_image = ref('')
+
     const router = useRouter()
     const route = useRoute()
+
     function change({target}) {
       router.push({path:`/${target.id}`})
       .then(() =>{
@@ -17,10 +21,16 @@ export default {
       if(route.path !== '/login') return true
       return false
     } 
+
     watch(() => route.path,() => {
       home.value = route.path.slice(1)
     })
-    return{change, home, show}
+    onUpdated(() => {
+      const {User_Image} = Store
+      user_image.value = User_Image
+    })
+
+    return{change, home, show, user_image}
   },
 }
 </script>
@@ -38,6 +48,9 @@ export default {
         <ion-icon @click="change" id="new"  :name="home != 'new' ? 'add-circle-outline' : 'add-circle-sharp'"></ion-icon>
         <ion-icon @click="change" id="search" :name="home != 'search' ? 'compass-outline' : 'compass-sharp'"></ion-icon>
         <ion-icon @click="change" id="like" :name="home != 'like' ? 'heart-outline' : 'heart-sharp'"></ion-icon>
+        <div class="card_profile_photo min">
+          <img :src="user_image" alt="">
+        </div>
       </div>
     </div>
   </header>
@@ -83,5 +96,21 @@ input{
 	padding: 10px;
 	border-radius: 5px;
 	background-color: #efefef;
+}
+.card_profile_photo {
+  height: 65px;
+  width: 65px;
+  padding: 2px;
+  background-image: var(--principal_gradient);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.card_profile_photo > img {
+  scale: 2;
+  filter: drop-shadow(0 0 1px black);
+}
+.min{
+  height: 26px;
+  width: 26px;
 }
 </style>

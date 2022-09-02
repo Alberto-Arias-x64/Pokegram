@@ -52,6 +52,7 @@
 }
 .cards_container{
     width: 100%;
+    margin: 0 10px;
     display: flex;
   flex-direction: row;
   gap: 15px;
@@ -81,7 +82,8 @@ p{
 #arrow_left, #arrow_right{
     position: absolute;
     top: 40px;
-    color: white
+    color: white;
+    user-select: none;
 }
 #arrow_right{
     right: 20px;
