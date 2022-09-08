@@ -5,13 +5,16 @@ import { Store } from "../store/store";
 
 const router = useRouter()
 
-const New_User = ref()
-const New_Password = ref()
+const New_User = ref('')
+const New_Password = ref('')
 
 const Check = () => {
-    const {Handles:{Change_Name}} = Store
-    Change_Name(New_User.value)
-    router.push({path:'/home'})
+    if(New_User.value !== ''){
+        const {Handles:{Change_Name}} = Store
+        Change_Name(New_User.value)
+        router.push({path:'/home'})
+    }
+    else alert('register a name')
 }
 
 </script>
