@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import No_Found from '../views/No_Found.vue'
 import Loggin from '../views/Logging.vue'
+import {Store} from '../store/store'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -12,6 +13,13 @@ const router = createRouter({
         {path:'/:catchAll(.*)', component: No_Found }
     ],
 })
-router.beforeEach
+router.beforeEach((to, from, next) => {
+    console.log(to)
+    if(to.path !== '/login' && Store.User_Name !== ''){
+        next()
+    }
+    else if (to.path === '/login') next()
+    else router.push('/login')
+})
 
 export default router
