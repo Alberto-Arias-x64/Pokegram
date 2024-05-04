@@ -67,5 +67,6 @@ h5 {
 }
 
 #app{
-  height: calc(100% - 71px);
+  height: 100%;
+  width: 100%;
 }

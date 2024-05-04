@@ -6,3 +6,4 @@ import Header from './components/Header.vue'
   <Header/>
   <router-view/>
 </template>
+

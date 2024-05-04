@@ -3,125 +3,140 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { Store } from "../store/store";
 
-const router = useRouter()
+const router = useRouter();
 
-const New_User = ref('')
-const New_Password = ref('')
+const New_User = ref("");
+const New_Password = ref("");
 
 const Check = () => {
-    if(New_User.value !== ''){
-        const {Handles:{Change_Name}} = Store
-        Change_Name(New_User.value)
-        router.push({path:'/home'})
-    }
-    else alert('register a name')
-}
-
+  if (New_User.value !== "") {
+    const {
+      Handles: { Change_Name },
+    } = Store;
+    Change_Name(New_User.value);
+    router.push({ path: "/home" });
+  } else alert("register a name");
+};
 </script>
 
 <template>
   <section id="login_container">
-    <img id="login_img" src="../assets/pokedexu_crop.png" alt="">
+    <img id="login_img" src="../assets/pokedexu_crop.png" alt="" />
     <div id="login_side">
-        <div class="login">
-            <img id="login_logo" src="../assets/logo.png" alt="" />
-            <div id="login_inputs">
-                <input type="text" placeholder="User" v-model="New_User" />
-                <input type="password" placeholder="Password" v-model="New_Password" />
-                <button id="button_login" @click="Check">Log In</button>
-            </div>
-            <hr style="width: 100%">
-            <p>OR</p>
-            <div id="login_link" class="mouse">
-                <img src="../../public/favicon.png" alt="">
-                <p>Login with Pokedex</p>
-            </div>
-            <p class="mouse mini_text">Forgot password?</p>
+      <div class="login">
+        <img id="login_logo" src="../assets/logo.png" alt="" />
+        <div id="login_inputs">
+          <input type="text" placeholder="User" v-model="New_User" />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="New_Password"
+          />
+          <button id="button_login" @click="Check">Log In</button>
         </div>
-        <div class="login">
-            <div>
-                <span>Don't have an account? </span><button>Sign up</button>
-            </div>
+        <hr style="width: 100%" />
+        <p>OR</p>
+        <div id="login_link" class="mouse">
+          <img src="../../public/favicon.png" alt="" />
+          <p>Login with Pokedex</p>
         </div>
+        <p class="mouse mini_text">Forgot password?</p>
+      </div>
+      <div class="login">
+        <div><span>Don't have an account? </span><button>Sign up</button></div>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-input{
-	width: calc(100% - 20px);
-	padding: 10px;
-	border-radius: 5px;
-	background-color: #efefef;
-    border: 1px solid var(--border_color);
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #efefef;
+  border: 1px solid var(--border_color);
 }
-#login_container{
-    height: 100%;
-    width: 700px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: center;
+#login_container {
+  height: 100%;
+  width: fit-content;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
 }
-.login{
-    padding: 20px 40px;
-    width: calc(350px - 80px);
+.login {
+  padding: 20px 40px;
+  width: calc(350px - 80px);
 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-    align-items: center;
+  align-items: center;
 
-    background-color: white;
-    border: 1px solid var(--border_color);
+  background-color: white;
+  border: 1px solid var(--border_color);
 }
-#login_img{
-    width: 100%;
-    height: auto;
+#login_img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
 }
-#login_side{
-    display: flex;
-    flex-direction: column;
-    gap: 10px
+#login_side {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-#login_logo{
-    width: 70%;
+#login_logo {
+  width: 70%;
 }
-#login_inputs{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+#login_inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-#login_link{
-    height: 1ch;
+#login_link {
+  height: 1ch;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 
-    color: #A40707;
-    font-weight: bold;
+  color: #a40707;
+  font-weight: bold;
 }
 #login_link > img {
-    height: 200%;
-    width: auto;
+  height: 200%;
+  width: auto;
 }
-#button_login{
-    height: 30px;
-    width: 100%;
+#button_login {
+  height: 30px;
+  width: 100%;
 
-    border-radius: 5px  ;
-    color: #efefef;
-    background-color: #0095f6;
+  border-radius: 5px;
+  color: #efefef;
+  background-color: #0095f6;
 }
-.mouse{
-    cursor: pointer;
+.mouse {
+  cursor: pointer;
 }
-.mini_text{
-    font-size: 12px;
+.mini_text {
+  font-size: 12px;
+}
+
+@media screen and (width < 768px) {
+  #login_container {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+  }
+  #login_img {
+    display: none;
+  }
 }
 </style>
