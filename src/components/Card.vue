@@ -1,32 +1,32 @@
 <script setup>
-  import { ref, defineProps } from "vue"
+import { ref, defineProps } from "vue";
 
-  const new_comment = ref("")
+const newComment = ref("");
 
-  const props = defineProps({
-    poke_name: String,
-    poke_image: String,
-    poke_height: Number,
-    poke_weight: Number,
-    poke_exp: Number,
-    poke_post: String,
-  })
+const props = defineProps({
+  pokeName: String,
+  pokeImage: String,
+  pokeHeight: Number,
+  pokeWeight: Number,
+  pokeExp: Number,
+  pokePost: String,
+});
 
-  function click_post(params) {
-    new_comment.value = ""
-  }
+function handleNewPost() {
+  newComment.value = "";
+}
 </script>
 
 <template>
-  <div class="card">
-    <header>
+  <div class="poke-card">
+    <header class="poke-card-header">
       <div class="card_profile_photo">
-        <img :src="props.poke_image" alt="" />
+        <img :src="props.pokeImage" alt="" />
       </div>
-      <h5>{{ props.poke_name }}</h5>
+      <h5>{{ props.pokeName }}</h5>
     </header>
     <div class="card_post">
-      <img :src="props.poke_post" alt="" />
+      <img :src="props.pokePost" alt="poke post" />
     </div>
     <div class="comments">
       <div class="icons">
@@ -35,7 +35,7 @@
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
       <div class="likes">
-        <p>{{ props.poke_exp }}</p>
+        <p>{{ props.pokeExp }}</p>
         <p>PokeLikes</p>
       </div>
     </div>
@@ -43,18 +43,17 @@
       <ion-icon name="happy-outline"></ion-icon>
       <input
         type="text"
-        name=""
-        id=""
-        v-model="new_comment"
+        name="comment"
+        v-model="newComment"
         placeholder="Add a comment..."
       />
-      <button @click="click_post">Post</button>
+      <button @click="handleNewPost">Post</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.card {
+.poke-card {
   width: 500px;
   height: fit-content;
 
@@ -66,14 +65,12 @@
   border-radius: 6px;
   background-color: white;
 }
-header {
+.poke-card-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-
   padding-left: 10px;
-
   border-bottom: 1px solid var(--border_color);
 }
 .card_profile_photo {

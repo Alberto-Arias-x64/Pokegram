@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import NoFound from "../views/NoFound.vue";
-import Loggin from "../views/Logging.vue";
+import Login from "../views/Logging.vue";
 import { Store } from "../store/store";
 
 const router = createRouter({
@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     { path: "/", redirect: "/login" },
     { path: "/home", component: () => import("../views/Home.vue") },
-    { path: "/login", component: Loggin },
+    { path: "/login", component: Login },
     { path: "/:catchAll(.*)", component: NoFound },
   ],
 });

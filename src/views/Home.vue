@@ -3,7 +3,7 @@ import { reactive, onBeforeMount, onMounted, ref } from "vue";
 
 import Card from "../components/Card.vue";
 import Profile from "../components/Profile.vue";
-import Spiner from "../components/Spiner.vue";
+import Spinner from "../components/Spinner.vue";
 import Stories from "../components/Stories.vue";
 import Side from "../components/Aside.vue";
 
@@ -55,7 +55,7 @@ onMounted(() => {
   };
 
   const observer = new IntersectionObserver(callback, options);
-  const target = document.querySelector("#spiner_main");
+  const target = document.querySelector("#spinner_main");
   observer.observe(target);
 });
 </script>
@@ -73,13 +73,13 @@ onMounted(() => {
           message,
           id,
         } in Poke_Data.Data"
-        :poke_name="name"
-        :poke_exp="base_experience"
-        :poke_image="front_default"
-        :poke_post="message"
+        :pokeName="name"
+        :pokeExp="base_experience"
+        :pokeImage="front_default"
+        :pokePost="message"
         :key="id"
       />
-      <Spiner id="spiner_main" />
+      <Spinner id="spinner_main" />
       <br />
     </div>
     <Profile :suggested_list="Poke_Array" />

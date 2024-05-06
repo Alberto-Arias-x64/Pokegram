@@ -1,5 +1,5 @@
 <script>
-import { ref, watch, onUpdated } from "vue";
+import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 export default {
