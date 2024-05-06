@@ -4,7 +4,6 @@ import { reactive, onBeforeMount, onMounted, ref } from "vue";
 import Card from "../components/Card.vue";
 import Profile from "../components/Profile.vue";
 import Spiner from "../components/Spiner.vue";
-import StoriesVue from "../components/Stories.vue";
 import Stories from "../components/Stories.vue";
 import Side from "../components/Aside.vue";
 
