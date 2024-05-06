@@ -5,60 +5,58 @@ import { Store } from "../store/store";
 
 const router = useRouter();
 
-const New_User = ref("");
-const New_Password = ref("");
+const userName = ref("");
+const userPassword = ref("");
 
-const Check = () => {
-  if (New_User.value !== "") {
+const handleCheck = () => {
+  if (userName.value) {
     const {
       Handles: { Change_Name },
     } = Store;
-    Change_Name(New_User.value);
+    Change_Name(userName.value);
     router.push({ path: "/home" });
   } else alert("register a name");
 };
 </script>
 
 <template>
-  <section id="login_container">
-    <img id="login_img" src="../assets/pokedexu_crop.png" alt="" />
+  <section class="poke-loggin-container">
+    <img
+      class="poke-loggin-img"
+      src="/images/pokedexu_crop.png"
+      alt="pokedex"
+    />
     <div id="login_side">
-      <div class="login">
-        <img id="login_logo" src="../assets/logo.png" alt="" />
-        <div id="login_inputs">
-          <input type="text" placeholder="User" v-model="New_User" />
+      <div class="poke-loggin">
+        <img class="poke-loggin-logo" src="/images/logo.png" alt="pokelogo" />
+        <div class="poke-loggin-inputs">
+          <input type="text" placeholder="User" v-model="userName" />
           <input
             type="password"
             placeholder="Password"
-            v-model="New_Password"
+            v-model="userPassword"
           />
-          <button id="button_login" @click="Check">Log In</button>
+          <button @click="handleCheck">Log In</button>
         </div>
-        <hr style="width: 100%" />
+        <hr />
         <p>OR</p>
-        <div id="login_link" class="mouse">
-          <img src="../../public/favicon.png" alt="" />
+        <div class="poke-login-pokedex">
+          <img src="/favicon.png" alt="pokeball" />
           <p>Login with Pokedex</p>
         </div>
-        <p class="mouse mini_text">Forgot password?</p>
+        <p class="poke-text-small">Forgot password?</p>
       </div>
-      <div class="login">
-        <div><span>Don't have an account? </span><button>Sign up</button></div>
+      <div>
+        <span>Don't have an account? </span
+        ><button class="secondary">Sign up</button>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-input {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #efefef;
-  border: 1px solid var(--border_color);
-}
-#login_container {
-  height: 100%;
+.poke-loggin-container {
+  height: 100vh;
   width: fit-content;
   margin: 0 auto;
   display: grid;
@@ -66,23 +64,20 @@ input {
   gap: 30px;
   align-items: center;
 }
-.login {
-  padding: 20px 40px;
-  width: calc(350px - 80px);
-
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  align-items: center;
-
-  background-color: white;
-  border: 1px solid var(--border_color);
-}
-#login_img {
+.poke-loggin-img {
   max-width: 300px;
   width: 100%;
   height: auto;
+}
+.poke-loggin {
+  padding: 20px 40px;
+  width: calc(350px - 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  background-color: white;
+  border: 1px solid var(--border_color);
 }
 #login_side {
   width: fit-content;
@@ -90,52 +85,37 @@ input {
   flex-direction: column;
   gap: 10px;
 }
-#login_logo {
+.poke-loggin-logo {
   width: 70%;
 }
-#login_inputs {
+.poke-loggin-inputs {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-#login_link {
+.poke-login-pokedex {
   height: 1ch;
-
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
-
   color: #a40707;
   font-weight: bold;
+  cursor: pointer;
 }
-#login_link > img {
+.poke-login-pokedex > img {
   height: 200%;
   width: auto;
 }
-#button_login {
-  height: 30px;
-  width: 100%;
-
-  border-radius: 5px;
-  color: #efefef;
-  background-color: #0095f6;
-}
-.mouse {
-  cursor: pointer;
-}
-.mini_text {
-  font-size: 12px;
-}
 
 @media screen and (width < 768px) {
-  #login_container {
+  .poke-loggin-container {
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
   }
-  #login_img {
+  .poke-loggin-img {
     display: none;
   }
 }

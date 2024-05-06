@@ -1,25 +1,27 @@
 <script setup>
-import { ref, onBeforeMount, defineProps, toRefs, defineEmits, } from "vue";
+import { ref, onBeforeMount, defineProps, toRefs, defineEmits } from "vue";
 import { Store } from "../store/store";
 
 const profile = ref(undefined);
-const { User_Name, Handles:{Change_Image} } = Store;
+const {
+  User_Name,
+  Handles: { Change_Image },
+} = Store;
 
 onBeforeMount(() => {
   fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
     .then((data) => data.json())
     .then((data) => {
-      profile.value = data
-      Change_Image(data.sprites.front_default)
-    })
+      profile.value = data;
+      Change_Image(data.sprites.front_default);
+    });
 });
 
 const Props = defineProps({
   suggested_list: Array,
 });
 
-const {suggested_list} = toRefs(Props)
-
+const { suggested_list } = toRefs(Props);
 </script>
 
 <template>
@@ -32,7 +34,7 @@ const {suggested_list} = toRefs(Props)
         <h5>{{ User_Name }}@pokegram</h5>
         <p>{{ profile.name }}</p>
       </div>
-      <button>Switch</button>
+      <button class="secondary">Switch</button>
     </div>
 
     <div id="separator">
@@ -40,17 +42,20 @@ const {suggested_list} = toRefs(Props)
       <h5>See All</h5>
     </div>
 
-    <div class="card_profile" v-for="{image, name} in suggested_list" :key="name" >
+    <div
+      class="card_profile"
+      v-for="{ image, name } in suggested_list"
+      :key="name"
+    >
       <div class="card_profile_photo min">
-        <img :src="image" alt="" />
+        <img :src="image" alt="profile photo" />
       </div>
       <div>
         <h5>{{ name }}</h5>
         <p>Followed by X64</p>
       </div>
-      <button>Follow</button>
+      <button class="secondary">Follow</button>
     </div>
-
   </section>
 </template>
 
@@ -90,11 +95,11 @@ p {
   scale: 2;
   filter: drop-shadow(0 0 1px black);
 }
-.min{
+.min {
   height: 32px;
   width: 32px;
 }
-#separator{
+#separator {
   display: grid;
   grid-template-columns: auto max-content;
 }
