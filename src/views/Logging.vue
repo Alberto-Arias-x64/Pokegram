@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { Store } from "../store/store";
+import { userStore } from "../store/userStore.js";
 
 const router = useRouter();
 
@@ -11,9 +11,9 @@ const userPassword = ref("");
 const handleCheck = () => {
   if (userName.value) {
     const {
-      Handles: { Change_Name },
-    } = Store;
-    Change_Name(userName.value);
+      Handles: { changeName },
+    } = userStore;
+    changeName(userName.value);
     router.push({ path: "/home" });
   } else alert("register a name");
 };

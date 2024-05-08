@@ -1,27 +1,27 @@
 <script setup>
-import { ref, onBeforeMount, defineProps, toRefs, defineEmits } from "vue";
-import { Store } from "../store/store";
+import { ref, onBeforeMount, defineProps, toRefs } from "vue";
+import { userStore } from "../store/userStore";
 
 const profile = ref(undefined);
 const {
-  User_Name,
-  Handles: { Change_Image },
-} = Store;
+  userName,
+  Handles: { changeImage },
+} = userStore;
 
 onBeforeMount(() => {
   fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
     .then((data) => data.json())
     .then((data) => {
       profile.value = data;
-      Change_Image(data.sprites.front_default);
+      changeImage(data.sprites.front_default);
     });
 });
 
 const Props = defineProps({
-  suggested_list: Array,
+  suggestedList: Array,
 });
 
-const { suggested_list } = toRefs(Props);
+const { suggestedList } = toRefs(Props);
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const { suggested_list } = toRefs(Props);
         <img :src="profile.sprites.front_default" alt="" />
       </div>
       <div>
-        <h5>{{ User_Name }}@pokegram</h5>
+        <h5>{{ userName }}@pokegram</h5>
         <p>{{ profile.name }}</p>
       </div>
       <button class="secondary">Switch</button>
@@ -44,7 +44,7 @@ const { suggested_list } = toRefs(Props);
 
     <div
       class="card_profile"
-      v-for="{ image, name } in suggested_list"
+      v-for="{ image, name } in suggestedList"
       :key="name"
     >
       <div class="card_profile_photo min">

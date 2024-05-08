@@ -1,47 +1,36 @@
 <script setup>
 import { toRefs, defineProps, ref } from "vue";
 const Props = defineProps({
-  poke_array: Array,
+  pokeArray: Array,
 });
 const story = ref(null);
-const { poke_array } = toRefs(Props);
+const { pokeArray } = toRefs(Props);
 
 const scroll = ({ target }) => {
-  if (target.id === "arrow_right") {
-    story.value.scrollBy({
-      left: 60,
-      behavior: "smooth",
-    });
-  } else {
-    story.value.scrollBy({
-      left: -60,
-      behavior: "smooth",
-    });
-  }
+  if (target.id === "arrowRight") story.value.scrollBy({ left: 60 });
+  else story.value.scrollBy({ left: -60 });
 };
 </script>
 
 <template>
-  <section class="cards">
-    <div class="cards_container" ref="story">
+  <section class="poke-stories-container">
+    <div class="poke-stories" ref="story">
       <div
-        class="card"
-        v-for="{ image, name } in poke_array"
+        class="poke-story"
+        v-for="{ image, name } in pokeArray"
         :key="image"
-        :src="image"
-        alt=""
       >
-        <img class="profile_photo" :src="image" alt="" />
+        <img class="poke-story-photo" :src="image" alt="profile photo" />
         <p>{{ name }}</p>
       </div>
     </div>
     <ion-icon
-      id="arrow_left"
+      id="arrowLeft"
       @click="scroll"
       name="arrow-back-circle"
     ></ion-icon>
     <ion-icon
-      id="arrow_right"
+      id="arrowRight"
       @click="scroll"
       name="arrow-forward-circle"
     ></ion-icon>
@@ -49,18 +38,16 @@ const scroll = ({ target }) => {
 </template>
 
 <style scoped>
-.cards {
+.poke-stories-container {
   position: relative;
   width: calc(500px - 40px);
   height: fit-content;
   padding: 20px;
-
   border: 1px solid var(--border_color);
-
   border-radius: 6px;
   background-color: white;
 }
-.cards_container {
+.poke-stories {
   width: 100%;
   margin: 0 10px;
   display: flex;
@@ -68,7 +55,7 @@ const scroll = ({ target }) => {
   gap: 15px;
   overflow-x: hidden;
 }
-.card {
+.poke-story {
   width: 62px;
   display: flex;
   flex-direction: column;
@@ -79,24 +66,22 @@ p {
   font-size: 12px;
   opacity: 0.5;
 }
-.profile_photo {
+.poke-story-photo {
   height: 60px;
   width: 60px;
   padding: 2px;
-
   background-image: var(--principal_gradient);
   border-radius: 50%;
-
   overflow: hidden;
 }
-#arrow_left,
-#arrow_right {
+#arrowLeft,
+#arrowRight {
   position: absolute;
   top: 40px;
   color: white;
   user-select: none;
 }
-#arrow_right {
+#arrowRight {
   right: 20px;
 }
 </style>

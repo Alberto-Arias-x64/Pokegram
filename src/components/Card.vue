@@ -21,25 +21,25 @@ function handleNewPost() {
   <div class="poke-card">
     <header class="poke-card-header">
       <div class="card_profile_photo">
-        <img :src="props.pokeImage" alt="" />
+        <img :src="props.pokeImage" alt="profile photo" />
       </div>
       <h5>{{ props.pokeName }}</h5>
     </header>
-    <div class="card_post">
+    <picture>
       <img :src="props.pokePost" alt="poke post" />
-    </div>
-    <div class="comments">
-      <div class="icons">
+    </picture>
+    <div class="poke-card-actions">
+      <div class="poke-card-icons">
         <ion-icon name="heart-outline"></ion-icon>
         <ion-icon name="chatbubble-outline"></ion-icon>
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
-      <div class="likes">
+      <div class="poke-card-likes">
         <p>{{ props.pokeExp }}</p>
         <p>PokeLikes</p>
       </div>
     </div>
-    <div class="new_comment">
+    <div class="poke-card-comment">
       <ion-icon name="happy-outline"></ion-icon>
       <input
         type="text"
@@ -47,7 +47,7 @@ function handleNewPost() {
         v-model="newComment"
         placeholder="Add a comment..."
       />
-      <button @click="handleNewPost">Post</button>
+      <button class="secondary" @click="handleNewPost">Post</button>
     </div>
   </div>
 </template>
@@ -85,18 +85,18 @@ function handleNewPost() {
   scale: 2;
   filter: drop-shadow(0 0 1px black);
 }
-.comments {
+.poke-card-actions {
   padding: 10px;
 }
-.icons {
+.poke-card-icons {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
-.icons > *:hover {
+.poke-card-icons > *:hover {
   opacity: 0.5;
 }
-.likes {
+.poke-card-likes {
   display: flex;
   flex-direction: row;
   gap: 1ch;
@@ -104,7 +104,7 @@ function handleNewPost() {
   font-size: small;
   font-weight: bold;
 }
-.new_comment {
+.poke-card-comment {
   padding: 0 10px;
   display: grid;
   grid-template-columns: max-content auto min-content;

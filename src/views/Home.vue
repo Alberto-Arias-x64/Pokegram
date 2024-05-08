@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 
 import Card from "../components/Card.vue";
 import Profile from "../components/Profile.vue";
@@ -7,64 +7,51 @@ import Spinner from "../components/Spinner.vue";
 import Stories from "../components/Stories.vue";
 import Side from "../components/Aside.vue";
 
-const Poke_Data = reactive({
-  Data: [],
-  Counter: 1,
-});
+import { postStore } from "../store/postStore.js";
+import { getRandomPost } from "../helpers/fetches.js";
 
-const Poke_Array = ref([]);
+const pokeArray = ref([]);
+let counter = 1;
+const {
+  data,
+  Handles: { loadData },
+} = postStore;
 
 onBeforeMount(() => {
-  Add_Data();
+  handleLoadData();
 });
 
-const Get_Data = async (id) => {
-  const Data_1 = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(
-    (Data) => Data.json()
-  );
-  const Data_2 = await fetch("https://dog.ceo/api/breeds/image/random").then(
-    (Data) => Data.json()
-  );
-  const Data = {
-    ...Data_1,
-    ...Data_2,
-  };
-  Poke_Array.value.push({
-    image: Data_1.sprites.front_default,
-    name: Data_1.name,
-  });
-  return Data;
-};
-
-const Add_Data = async () => {
-  Poke_Data.Data.push(await Get_Data(Poke_Data.Counter));
+const handleLoadData = async () => {
+  const [data1, data2] = await getRandomPost(counter);
+  loadData(data1);
+  pokeArray.value.push(data2);
 };
 
 onMounted(() => {
   const options = {
-    root: document.querySelector("body"),
+    root: null,
     rootMargin: "0px",
     threshold: 0.5,
   };
 
-  const callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      Poke_Data.Counter++;
-      Add_Data();
+  const callback = (entries) => {
+    entries.forEach(() => {
+      counter++;
+      handleLoadData();
     });
   };
 
-  const observer = new IntersectionObserver(callback, options);
-  const target = document.querySelector("#spinner_main");
-  observer.observe(target);
+  const IO = new IntersectionObserver(callback, options);
+  const target = document.querySelector("#spinner");
+  IO.observe(target);
 });
 </script>
 
 <template>
   <main>
     <Side />
-    <div id="cards">
-      <Stories :poke_array="Poke_Array" />
+    <div class="poke-cards">
+      <Stories :pokeArray="pokeArray" />
       <Card
         v-for="{
           name,
@@ -72,17 +59,17 @@ onMounted(() => {
           sprites: { front_default },
           message,
           id,
-        } in Poke_Data.Data"
+        } in data"
         :pokeName="name"
         :pokeExp="base_experience"
         :pokeImage="front_default"
         :pokePost="message"
         :key="id"
       />
-      <Spinner id="spinner_main" />
+      <Spinner id="spinner" />
       <br />
     </div>
-    <Profile :suggested_list="Poke_Array" />
+    <Profile :suggestedList="pokeArray" />
   </main>
 </template>
 
@@ -94,7 +81,7 @@ main {
   display: grid;
   grid-template-columns: max-content auto max-content;
 }
-#cards {
+.poke-cards {
   width: fit-content;
   margin: 0 auto;
 
