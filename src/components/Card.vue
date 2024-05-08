@@ -54,7 +54,7 @@ function handleNewPost() {
 
 <style scoped>
 .poke-card {
-  width: 500px;
+  width: 100%;
   height: fit-content;
 
   display: grid;

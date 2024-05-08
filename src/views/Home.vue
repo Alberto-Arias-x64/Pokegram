@@ -50,41 +50,46 @@ onMounted(() => {
 <template>
   <main>
     <Side />
-    <div class="poke-cards">
-      <Stories :pokeArray="pokeArray" />
-      <Card
-        v-for="{
-          name,
-          base_experience,
-          sprites: { front_default },
-          message,
-          id,
-        } in data"
-        :pokeName="name"
-        :pokeExp="base_experience"
-        :pokeImage="front_default"
-        :pokePost="message"
-        :key="id"
-      />
-      <Spinner id="spinner" />
-      <br />
-    </div>
+    <section class="poke-cards-container">
+      <div class="poke-cards">
+        <Stories :pokeArray="pokeArray" />
+        <Card
+          v-for="{
+            name,
+            base_experience,
+            sprites: { front_default },
+            message,
+            id,
+          } in data"
+          :pokeName="name"
+          :pokeExp="base_experience"
+          :pokeImage="front_default"
+          :pokePost="message"
+          :key="id"
+        />
+        <Spinner id="spinner" />
+        <br />
+      </div>
+    </section>
     <Profile :suggestedList="pokeArray" />
   </main>
 </template>
 
 <style scoped>
 main {
-  padding: 20px;
-  height: 100%;
   width: 100%;
+  padding: 20px;
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: max-content 1fr max-content;
+  justify-content: center;
+}
+.poke-cards-container {
+  width: 100%;
 }
 .poke-cards {
-  width: fit-content;
+  max-width: 500px;
+  width: 100%;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   gap: 10px;

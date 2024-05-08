@@ -7,8 +7,8 @@ const story = ref(null);
 const { pokeArray } = toRefs(Props);
 
 const scroll = ({ target }) => {
-  if (target.id === "arrowRight") story.value.scrollBy({ left: 60 });
-  else story.value.scrollBy({ left: -60 });
+  if (target.id === "arrowRight") story.value.scrollBy({ left: 75 });
+  else story.value.scrollBy({ left: -75 });
 };
 </script>
 
@@ -40,7 +40,7 @@ const scroll = ({ target }) => {
 <style scoped>
 .poke-stories-container {
   position: relative;
-  width: calc(500px - 40px);
+  width: 100%;
   height: fit-content;
   padding: 20px;
   border: 1px solid var(--border_color);
