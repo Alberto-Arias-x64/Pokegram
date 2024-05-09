@@ -13,7 +13,7 @@ const router = createRouter({
   ],
 });
 router.beforeEach((to, _from, next) => {
-  if (to.path !== "/login" && userStore.User_Name !== "") next();
+  if (to.path !== "/login" && userStore.userName !== "") next();
   else if (to.path === "/login") next();
   else router.push("/login");
 });
