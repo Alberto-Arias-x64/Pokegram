@@ -26,8 +26,8 @@ const { suggestedList } = toRefs(Props);
 
 <template>
   <section v-if="profile" class="poke-sidePanel">
-    <div class="card_profile">
-      <div class="card_profile_photo">
+    <div class="poke-profile">
+      <div class="poke-profile-photo">
         <img :src="profile.sprites.front_default" alt="" />
       </div>
       <div>
@@ -37,7 +37,7 @@ const { suggestedList } = toRefs(Props);
       <button class="secondary">Switch</button>
     </div>
 
-    <div id="separator">
+    <div class="poke-separator">
       <h4>Suggestions For You</h4>
       <h5>See All</h5>
     </div>
@@ -77,7 +77,7 @@ p {
   top: 20px;
   height: fit-content;
 }
-.card_profile {
+.poke-profile {
   height: fit-content;
   display: grid;
   grid-template-columns: min-content auto min-content;
@@ -86,7 +86,7 @@ p {
 
   gap: 10px;
 }
-.card_profile_photo {
+.poke-profile-photo {
   height: 65px;
   width: 65px;
   padding: 2px;
@@ -94,7 +94,7 @@ p {
   border-radius: 50%;
   overflow: hidden;
 }
-.card_profile_photo > img {
+.poke-profile-photo > img {
   scale: 2;
   filter: drop-shadow(0 0 1px black);
 }
@@ -102,7 +102,7 @@ p {
   height: 32px;
   width: 32px;
 }
-#separator {
+.poke-separator {
   display: grid;
   grid-template-columns: auto max-content;
 }
