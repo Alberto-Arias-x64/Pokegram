@@ -25,7 +25,7 @@ const { suggestedList } = toRefs(Props);
 </script>
 
 <template>
-  <section v-if="profile" id="side_panel">
+  <section v-if="profile" class="poke-sidePanel">
     <div class="card_profile">
       <div class="card_profile_photo">
         <img :src="profile.sprites.front_default" alt="" />
@@ -69,10 +69,13 @@ p {
   color: #8e8e8e;
   font-size: 12px;
 }
-#side_panel {
+.poke-sidePanel {
+  position: sticky;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  top: 20px;
+  height: fit-content;
 }
 .card_profile {
   height: fit-content;

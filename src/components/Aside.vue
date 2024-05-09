@@ -72,15 +72,16 @@ export default {
 </template>
 <style scoped>
 .poke-aside {
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: flex-start;
   margin-bottom: 10px;
-  background-color: white;
   border-bottom: 1px solid var(--border_color);
+  position: sticky;
+  top: 20px;
 }
 .poke-aside-nav {
   display: flex;
@@ -94,9 +95,11 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  gap: 8px;
 }
 .poke-aside-logo {
   height: 40px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 </style>
