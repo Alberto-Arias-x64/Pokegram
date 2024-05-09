@@ -106,4 +106,10 @@ p {
   display: grid;
   grid-template-columns: auto max-content;
 }
+
+@media screen and (width < 920px) {
+  .poke-sidePanel {
+    display: none;
+  }
+}
 </style>

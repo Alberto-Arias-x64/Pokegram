@@ -102,4 +102,10 @@ export default {
   cursor: pointer;
   margin-bottom: 20px;
 }
+
+@media screen and (width < 768px) {
+  .poke-aside {
+    display: none;
+  }
+}
 </style>
