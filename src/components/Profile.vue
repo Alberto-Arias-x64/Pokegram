@@ -43,11 +43,11 @@ const { suggestedList } = toRefs(Props);
     </div>
 
     <div
-      class="card_profile"
+      class="poke-profile"
       v-for="{ image, name } in suggestedList"
       :key="name"
     >
-      <div class="card_profile_photo min">
+      <div class="poke-profile-photo min">
         <img :src="image" alt="profile photo" />
       </div>
       <div>
