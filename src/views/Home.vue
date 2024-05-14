@@ -94,4 +94,9 @@ main {
   flex-direction: column;
   gap: 10px;
 }
+@media screen and (width < 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
