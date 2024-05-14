@@ -51,19 +51,19 @@ export default {
       </p>
       <p @click="handleNavigate" id="new">
         <ion-icon
-          :name="home != 'new' ? 'add-circle-outline' : 'add-circle-sharp'"
+          :name="home !== 'new' ? 'add-circle-outline' : 'add-circle-sharp'"
         ></ion-icon>
         Create
       </p>
       <p @click="handleNavigate" id="search">
         <ion-icon
-          :name="home != 'search' ? 'compass-outline' : 'compass-sharp'"
+          :name="home !== 'search' ? 'compass-outline' : 'compass-sharp'"
         ></ion-icon>
         Search
       </p>
       <p @click="handleNavigate" id="like">
         <ion-icon
-          :name="home != 'like' ? 'heart-outline' : 'heart-sharp'"
+          :name="home !== 'like' ? 'heart-outline' : 'heart-sharp'"
         ></ion-icon>
         Notifications
       </p>
